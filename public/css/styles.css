@@ -1,0 +1,91 @@
+html {
+    font-size: 10px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+*, 
+*::before, 
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Tomorrow', sans-serif;
+    font-size: 1.4rem;
+    min-height: 100vh;
+    margin: 0; 
+    overflow-x: hidden;
+    padding: 0; 
+    width: 100vw;
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5,
+h6, 
+p {
+    margin: 0; 
+    padding: 0; 
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/*
+ * Header Section
+*/
+
+header {
+    color: rgb(26, 115, 232);
+    font-size: 1.5rem;
+    padding: 3% 5%;
+    width: 100%;
+}
+
+/*
+ * Footer Section
+*/
+
+footer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 3%;
+    width: 100%;
+}
+
+/*
+ * Main Section
+*/
+
+main {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    justify-content: center;
+    padding: 5%;
+    width: 100%;
+}
+
+/* Query Container */
+
+.query-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+#canvas-container {
+    align-items: flex-end;
+    display: flex;
+    height: 80%;
+    width: 100%;
+}

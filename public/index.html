@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo.viz</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Algo.viz</h1>
+    </header>
+
+    <main>
+        <!-- Query Container -->
+        <div class="query-container">
+            <form onsubmit="processInput(event)">
+                <label>
+                    Number of Elements (2-100):
+                    <input id="elements" name="elements" placeholder="Number of Items" type="number" min="2" max="100" required>
+                </label>
+                <button type="submit">Generate</button>
+            </form>
+
+            <button onclick="sort()">Sort</button>
+        </div> <!-- query-container -->
+
+        <!-- Canvas Container -->
+        <div id="canvas-container"></div>
+    </main>
+
+    <footer>
+        Coded by Brian Hyun.
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="scripts/index.js"></script>
+</body>
+
+</html>
