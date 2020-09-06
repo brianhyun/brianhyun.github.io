@@ -90,32 +90,22 @@ async function swapAnimation(swapIndices, arr) {
             setTimeout(() => {
                 swapStyle(swapIndices[i][0], swapIndices[i][1], arr);
 
+                // After all the swaps have taken place, run the endAnimation() sequence. 
                 if (i === swapIndices.length - 1) {
-                    resolve('swap animation complete');
+                    resolve(endAnimation());
                 }
             }, i * 10);
         }
     }); 
-
-    const array = $('#canvas-container').children();
-    const arrLen = $('#canvas-container').children().length;
-
-    await new Promise((resolve, reject) => {
-        for (let i = 0; i < arrLen; i++) {
-            setTimeout(() => {
-                array[i].style.backgroundColor = "#39D055";
-            }, i * 5);
-        }
-    }); 
 }
 
-// function endAnimation() {
-//     const arr = $('#canvas-container').children();
-//     const arrLen = $('#canvas-container').children().length;
+function endAnimation() {
+    const arr = $('#canvas-container').children();
+    const arrLen = $('#canvas-container').children().length;
 
-//     for (let i = 0; i < arrLen; i++) {
-//         setTimeout(() => {
-//             arr[i].style.backgroundColor = "#39D055";
-//         }, i * 5);
-//     }
-// }
+    for (let i = 0; i < arrLen; i++) {
+        setTimeout(() => {
+            arr[i].style.backgroundColor = "#39D055";
+        }, i * 35);
+    }
+}
