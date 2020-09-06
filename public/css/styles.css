@@ -89,3 +89,15 @@ main {
     height: 80%;
     width: 100%;
 }
+
+.rectangles {
+    background-color: rgb(26, 115, 232);
+    border: 1px solid #ffffff;
+    position: relative; /* set position of value div */
+}
+
+.values {
+    color: rgb(26, 115, 232);
+    position: absolute; 
+        top: -20px;
+}
