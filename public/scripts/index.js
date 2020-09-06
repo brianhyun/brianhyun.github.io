@@ -1,4 +1,4 @@
-let numOfElements = 25; 
+const numOfElements = 25; 
 
 $(document).ready(function() {
     drawRectangles(numOfElements);
@@ -85,22 +85,37 @@ function swapStyle(a, b, arr) {
 }
 
 async function swapAnimation(swapIndices, arr) {
-    await new Promise ((resolve, reject) => {
+    await new Promise((resolve, reject) => {
         for (let i = 0; i < swapIndices.length; i++) {
             setTimeout(() => {
                 swapStyle(swapIndices[i][0], swapIndices[i][1], arr);
+
+                if (i === swapIndices.length - 1) {
+                    resolve('swap animation complete');
+                }
             }, i * 10);
         }
-    });
-}
+    }); 
 
-function endAnimation() {
-    const arr = $('#canvas-container').children();
+    const array = $('#canvas-container').children();
     const arrLen = $('#canvas-container').children().length;
 
-    for (let i = 0; i < arrLen; i++) {
-        setTimeout(() => {
-            arr[i].style.backgroundColor = "#39D055";
-        }, i * 5);
-    }
+    await new Promise((resolve, reject) => {
+        for (let i = 0; i < arrLen; i++) {
+            setTimeout(() => {
+                array[i].style.backgroundColor = "#39D055";
+            }, i * 5);
+        }
+    }); 
 }
+
+// function endAnimation() {
+//     const arr = $('#canvas-container').children();
+//     const arrLen = $('#canvas-container').children().length;
+
+//     for (let i = 0; i < arrLen; i++) {
+//         setTimeout(() => {
+//             arr[i].style.backgroundColor = "#39D055";
+//         }, i * 5);
+//     }
+// }
