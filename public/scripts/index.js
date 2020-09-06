@@ -1,4 +1,4 @@
-const numOfElements = 25; 
+let numOfElements = 25; 
 
 $(document).ready(function() {
     drawRectangles(numOfElements);
@@ -56,13 +56,6 @@ function bubbleSort() {
 
             // Compare Values and Swap if Current > Next
             if (currentValue > nextValue) {
-                // Having just the swapIndices won't work because every subsequent swap relies on the previous swap to bring the unsorted array closer to being sorted.  
-                // [5, 4, 3]
-                // [4, 5, 3]
-                // [4, 3, 5]
-
-                // [5, 4, 3]
-                // I was never updating the array. I was simply storing values. Dummy!
                 swapIndices.push([j, j+1]);
                 swapData(j, j + 1, arr); 
             }
@@ -94,7 +87,7 @@ async function swapAnimation(swapIndices, arr) {
                 if (i === swapIndices.length - 1) {
                     resolve(endAnimation());
                 }
-            }, i * 10);
+            }, i * 35);
         }
     }); 
 }
