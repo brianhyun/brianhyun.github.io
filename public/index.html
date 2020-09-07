@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algo.viz</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500&display=swap" rel="stylesheet">
+    <title>Sort.viz</title>
 
-    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -20,24 +18,39 @@
 
     <main>
         <!-- Query Container -->
-        <div class="query-container">
-            <form onsubmit="processInput(event)">
-                <label>
-                    Number of Elements (1-100):
-                    <input id="elements" name="elements" placeholder="Number of Items" type="number" min="1" max="100" required>
-                </label>
-                <button type="submit">Generate</button>
+        <section class="query-container">
+            <form class="input-form" onsubmit="processInput(event)">
+                <input class="elements-input" name="elements" placeholder="Number of Items" type="number" min="1" max="100" required>
+                <button class="generate-btn" type="submit">Generate</button>
             </form>
 
-            <button onclick="sort()">Sort</button>
-        </div> <!-- query-container -->
+            <div class="algorithms">
+                <div id="bubble-sort" class="sorts">
+                    Bubble 
+                </div>
+                <div id="selection-sort" class="sorts">
+                    Selection 
+                </div>
+                <div id="insertion-sort" class="sorts">
+                    Insertion
+                </div>
+                <div id="quick-sort" class="sorts">
+                    Quick 
+                </div>
+                <div id="merge-sort" class="sorts">
+                    Merge 
+                </div>
+            </div>
+
+            <button class="sort-btn" onclick="sort()">Sort</button>
+        </section>
 
         <!-- Canvas Container -->
-        <div id="canvas-container"></div>
+        <section id="canvas-container"></section>
     </main>
 
     <footer>
-        Coded by Brian Hyun.
+        Coded by Brian Hyun
     </footer>
 
     <!-- Scripts -->

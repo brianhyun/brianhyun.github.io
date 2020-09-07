@@ -1,7 +1,6 @@
 // On page load, have a default number of rectangles on display and ready to be sorted. 
 $(document).ready(function() {
     const numOfElements = 25; 
-
     drawRectangles(numOfElements);
 
     showValues();
@@ -11,8 +10,6 @@ function showValues() {
     // Grab all rectangles from canvas container. 
     const arr = $('#canvas-container').children();
     const arrLen = $('#canvas-container').children().length;
-
-    console.log(arr);
 
     // Go through all the divs, get height value, and create value div. 
     for (let i = 0; i < arrLen; i++) {
@@ -61,7 +58,6 @@ function drawRectangles(numOfElements) {
     }
 }
 
-// On sort button click, sort rectangles. 
 function sort() {
     bubbleSort(); 
 }
@@ -101,6 +97,7 @@ function bubbleSort() {
     return swapAnimation(swapIndices, arr);
 }
 
+// Swap Dataset Height
 function swapData(a, b, arr) {
     let dataTemp = arr[a].dataset.height;
     arr[a].dataset.height = arr[b].dataset.height;
@@ -108,9 +105,15 @@ function swapData(a, b, arr) {
 }
 
 function swapStyle(a, b, arr) {
-    let temp = arr[a].style.height;
+    // Swap values for height property. 
+    let styleTemp = arr[a].style.height;
     arr[a].style.height = arr[b].style.height;
-    arr[b].style.height = temp;
+    arr[b].style.height = styleTemp;
+
+    // Swap innerText for div values. 
+    let textTemp = arr[a].firstChild.innerText;
+    arr[a].firstChild.innerText = arr[b].firstChild.innerText;
+    arr[b].firstChild.innerText = textTemp;
 }
 
 async function swapAnimation(swapIndices, arr) {

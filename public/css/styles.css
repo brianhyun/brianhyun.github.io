@@ -54,6 +54,7 @@ header {
 
 footer {
     align-items: center;
+    color: #A3A3A3;
     display: flex;
     justify-content: center;
     padding: 3%;
@@ -65,39 +66,129 @@ footer {
 */
 
 main {
-    align-items: center;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     height: 70vh;
-    justify-content: center;
-    padding: 5%;
+    padding: 2% 5%;
     width: 100%;
 }
 
 /* Query Container */
-
 .query-container {
+    align-items: center;
+    background-color: #F8F8F8;
+    border-radius: 5px;
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 5%;
-    width: 100%;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    margin-right: 5%;
+    padding: 2%;
+    width: 25%;
 }
 
+/* Canvas Container */
 #canvas-container {
     align-items: flex-end;
     display: flex;
-    height: 80%;
+    height: 100%;
     width: 100%;
 }
 
 .rectangles {
     background-color: rgb(26, 115, 232);
     border: 1px solid #ffffff;
+    border-radius: 5px;
     position: relative; /* set position of value div */
 }
 
 .values {
     color: rgb(26, 115, 232);
+    font-weight: 500;
     position: absolute; 
-        top: -20px;
+        top: -25px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Input */
+.input-form, 
+.elements-input, 
+.generate-btn {
+    width: 100%;
+}
+
+.elements-input, 
+.generate-btn {
+    font-family: 'Tomorrow', sans-serif;
+}
+
+.elements-input {
+    border: 0;
+    border-radius: 5px;
+    color: rgb(26, 115, 232);
+    margin-bottom: 5%;
+    padding: 5%;
+}
+
+.elements-input:active {
+    outline: 1px solid rgb(26, 115, 232);
+    outline-offset: -1px;
+}
+
+.generate-btn {
+    border: 0;
+    border-radius: 5px;
+    padding: 5%;
+}
+
+.generate-btn:hover {
+    cursor: pointer;
+}
+
+/* Algorithms Container */
+.algorithms { 
+    display: flex; 
+    flex-direction: column; 
+    width: 100%;
+}
+
+/* Sorts */
+.sorts {
+    border: 1px solid rgb(26, 115, 232);
+    border-radius: 45px;
+    color: rgb(26, 115, 232);
+    margin-bottom: 5%;
+    padding: 5%;
+    text-align: center;
+}
+
+.sorts:hover {
+    background-color: rgb(26, 115, 232);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* Sort Button */
+.sort-btn {
+    background-color: rgb(26, 115, 232);
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-family: 'Tomorrow', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    padding: 7%;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.sort-btn:hover {
+    background-color: #1464CC;
+    cursor: pointer;
+}
+
+.sort-btn:active {
+    outline: none;
 }
