@@ -76,15 +76,19 @@ main {
 /* Query Container */
 .query-container {
     align-items: center;
-    background-color: #F8F8F8;
-    border-radius: 5px;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
     margin-right: 5%;
-    padding: 2%;
     width: 25%;
+}
+
+.query-section {
+    background-color: #F8F8F8;
+    border-radius: 5px;
+    padding: 5%;
+    width: 100%;
 }
 
 /* Canvas Container */
@@ -112,18 +116,18 @@ main {
 }
 
 /* Input */
-.input-form, 
-.elements-input, 
+.form__elements, 
+#elements, 
 .generate-btn {
     width: 100%;
 }
 
-.elements-input, 
+#elements, 
 .generate-btn {
     font-family: 'Tomorrow', sans-serif;
 }
 
-.elements-input {
+#elements {
     border: 0;
     border-radius: 5px;
     color: rgb(26, 115, 232);
@@ -131,7 +135,7 @@ main {
     padding: 5%;
 }
 
-.elements-input:active {
+#elements:active {
     outline: 1px solid rgb(26, 115, 232);
     outline-offset: -1px;
 }
@@ -142,28 +146,48 @@ main {
     padding: 5%;
 }
 
+.generate-btn:focus {
+    outline: none;
+}
+
 .generate-btn:hover {
-    cursor: pointer;
+    cursor: pointer;    
+}
+
+/* Display */
+.display {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+#display__checkbox {
+    border: 0;
+    height: 100%;
 }
 
 /* Algorithms Container */
-.algorithms { 
-    display: flex; 
-    flex-direction: column; 
-    width: 100%;
-}
-
-/* Sorts */
-.sorts {
-    border: 1px solid rgb(26, 115, 232);
-    border-radius: 45px;
-    color: rgb(26, 115, 232);
-    margin-bottom: 5%;
-    padding: 5%;
+.algorithms__header {
     text-align: center;
 }
 
-.sorts:hover {
+.algorithms__sorts-container { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
+    margin: 6% 0;
+    width: 100%;
+}
+
+.algorithm__sorts {
+    border: 1px solid rgb(26, 115, 232);
+    border-radius: 5px;
+    color: rgb(26, 115, 232);
+    padding: 8%;
+    text-align: center;
+}
+
+.algorithm__sorts:hover {
     background-color: rgb(26, 115, 232);
     color: #ffffff;
     cursor: pointer;
@@ -189,6 +213,6 @@ main {
     cursor: pointer;
 }
 
-.sort-btn:active {
+.sort-btn:focus {
     outline: none;
 }

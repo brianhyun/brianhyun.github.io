@@ -1,12 +1,21 @@
-// On page load, have a default number of rectangles on display and ready to be sorted. 
 $(document).ready(function() {
+    // Have the page loaded with an unsorted array of rectangles. 
     const numOfElements = 25; 
     drawRectangles(numOfElements);
 
-    showValues();
+    // Create value divs to be presented on user's request. 
+    createValueDivs();
+
+    // On user's request, show or hide value divs. 
+    $("#display__checkbox").click((event) => {
+        // If a child element exists, then the values have already been revealed and we want to hide the values.
+        $(".values").toggle();
+    });
 });
 
-function showValues() {
+
+
+function createValueDivs() {
     // Grab all rectangles from canvas container. 
     const arr = $('#canvas-container').children();
     const arrLen = $('#canvas-container').children().length;
@@ -25,12 +34,19 @@ function showValues() {
         // Append parsed content to rectangle. 
         arr[i].append(valueDiv[0]);
     }
+
+    $(".values").hide();
 }
 
-// When user submits a specific number of rectangles, call drawRectangle() function. 
+// When user clicks "generates"
 function processInput(event) {
     const numOfElements = $('#elements').val();
     drawRectangles(numOfElements);
+
+    // If 'display values' is checked, then uncheck it. 
+    if ($("#display__checkbox")[0].checked) {
+        $("#display__checkbox").prop("checked", false);
+    }
 
     // Prevent Default Form Behavior
     event.preventDefault();
@@ -39,6 +55,7 @@ function processInput(event) {
 function drawRectangles(numOfElements) {
     // Remove all other divs that may be in the container from previous sort operations. 
     $('#canvas-container').empty();
+    $('.values').empty();
 
     // Calculate the width of each rectangle based on the container width and number of selected elements. 
     const rectWidth = $('#canvas-container').width() / numOfElements; 
@@ -50,12 +67,14 @@ function drawRectangles(numOfElements) {
 
         // Create new div with random height, calculated width, and data attribute equal to random height.
         const height = `height: ${randomNumber}%;`;
-        const width = `width: ${rectWidth}px;`;
+        const width = `width: ${rectWidth}%;`;
         const data = `data-height="${randomNumber}"`;
         const newDiv = `<div class="rectangles" style='${height}${width}' ${data}></div>`;
 
         $('#canvas-container').append(newDiv);  
     }
+
+    createValueDivs();
 }
 
 function sort() {

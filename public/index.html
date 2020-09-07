@@ -19,30 +19,42 @@
     <main>
         <!-- Query Container -->
         <section class="query-container">
-            <form class="input-form" onsubmit="processInput(event)">
-                <input class="elements-input" name="elements" placeholder="Number of Items" type="number" min="1" max="100" required>
-                <button class="generate-btn" type="submit">Generate</button>
-            </form>
-
-            <div class="algorithms">
-                <div id="bubble-sort" class="sorts">
-                    Bubble 
-                </div>
-                <div id="selection-sort" class="sorts">
-                    Selection 
-                </div>
-                <div id="insertion-sort" class="sorts">
-                    Insertion
-                </div>
-                <div id="quick-sort" class="sorts">
-                    Quick 
-                </div>
-                <div id="merge-sort" class="sorts">
-                    Merge 
-                </div>
+            <div class="query-section form">
+                <form class="form__elements" onsubmit="processInput(event)">
+                    <input id="elements" placeholder="Number of Items" type="number" min="1" max="100" required>
+                    <button class="generate-btn" type="submit">Generate</button>
+                </form>
             </div>
 
-            <button class="sort-btn" onclick="sort()">Sort</button>
+            <div class="query-section display">
+                <label for="display__checkbox">
+                    Display/Hide Values
+                </label>
+                <input id="display__checkbox" type="checkbox" name="displayValues">
+            </div>
+    
+            <div class="query-section algorithms">
+                <p class="algorithms__header">Pick Sort</p>
+                <div class="algorithms__sorts-container">
+                    <div id="bubble-sort" class="algorithm__sorts">
+                        Bubble 
+                    </div>
+                    <div id="selection-sort" class="algorithm__sorts">
+                        Selection 
+                    </div>
+                    <div id="insertion-sort" class="algorithm__sorts">
+                        Insertion
+                    </div>
+                    <div id="quick-sort" class="algorithm__sorts">
+                        Quick 
+                    </div>
+                    <div id="merge-sort" class="algorithm__sorts">
+                        Merge 
+                    </div>
+                </div>
+
+                <button class="sort-btn" onclick="sort()">Sort</button>
+            </div>
         </section>
 
         <!-- Canvas Container -->
