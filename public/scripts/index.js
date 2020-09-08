@@ -64,10 +64,9 @@ $(document).ready(() => {
 
 function createValueDivs() {
     const arr = $('#canvas-container').children();
-    const arrLen = $('#canvas-container').children().length;
 
     // Go through all the divs, get height value, and create new values-div. 
-    for (let i = 0; i < arrLen; i++) {
+    for (let i = 0; i < arr.length; i++) {
         const currentRectangleHeight = arr[i].dataset.height;
 
         const div = `<div class='values'>${currentRectangleHeight}</div>`;
@@ -106,9 +105,9 @@ function drawRectangles(numOfElements) {
     createValueDivs();
 }
 
+// Sorting Algorithms
 function bubbleSort() {
     const arr = $('#canvas-container').children();
-    const arrLen = $('#canvas-container').children().length;
 
     const swapIndices = [];
 
@@ -117,8 +116,8 @@ function bubbleSort() {
         return endAnimation();
     }
 
-    for (let i = 0; i < arrLen; i++) {
-        for (let j = 0; j < arrLen - i - 1; j++) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
             // Convert String-Type Values to Numbers
                 // The height values are stored in the dataset-height attribute of all divs. 
                 // The dataset-height attribute only accepts string values. 
@@ -137,6 +136,35 @@ function bubbleSort() {
         }
     }
 
+    return swapAnimation(swapIndices, arr);
+}
+
+function insertionSort() {
+    const arr = $('#canvas-container').children();
+
+    const swapIndices = [];
+
+    // Array of one element is already sorted. Call end animation sequence. 
+    if(arr.length === 1) {
+        return endAnimation();
+    }
+
+    for (let i = 1; i < arr.length; i++) {
+        let index = i; 
+        
+		for (let j = i - 1; j >= 0; j--) {
+            const currentValue = parseInt(arr[index].dataset.height, 10);
+            const previousValue = parseInt(arr[j].dataset.height, 10);
+
+			if (currentValue < previousValue) {
+                swapIndices.push([index, j]);
+                swapData(index, j, arr);
+            }
+            
+			index--; 
+		}
+    }
+    
     return swapAnimation(swapIndices, arr);
 }
 
@@ -178,9 +206,8 @@ async function swapAnimation(swapIndices, arr) {
 // Go through the sorted array and change the background colors for rectangles-divs. 
 function endAnimation() {
     const arr = $('#canvas-container').children();
-    const arrLen = $('#canvas-container').children().length;
 
-    for (let i = 0; i < arrLen; i++) {
+    for (let i = 0; i < arr.length; i++) {
         setTimeout(() => {
             arr[i].style.backgroundColor = '#39D055';
         }, i * 35);
