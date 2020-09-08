@@ -1,19 +1,12 @@
 $(document).ready(function() {
-    // Have the page loaded with an unsorted array of rectangles. 
-    const numOfElements = 25; 
-    drawRectangles(numOfElements);
+    // Have the page loaded with an unsorted array of 25 rectangles.  
+    drawRectangles(25);
 
-    // Create value divs to be presented on user's request. 
-    createValueDivs();
-
-    // On user's request, show or hide value divs. 
+    // Show/hide value divs on checkbox click. 
     $("#display__checkbox").click((event) => {
-        // If a child element exists, then the values have already been revealed and we want to hide the values.
         $(".values").toggle();
     });
 });
-
-
 
 function createValueDivs() {
     // Grab all rectangles from canvas container. 
@@ -55,7 +48,7 @@ function processInput(event) {
 function drawRectangles(numOfElements) {
     // Remove all other divs that may be in the container from previous sort operations. 
     $('#canvas-container').empty();
-    $('.values').empty();
+    $('.values').detach();
 
     // Calculate the width of each rectangle based on the container width and number of selected elements. 
     const rectWidth = $('#canvas-container').width() / numOfElements; 
