@@ -106,10 +106,6 @@ function drawRectangles(numOfElements) {
     createValueDivs();
 }
 
-function sort() {
-    bubbleSort(); 
-}
-
 function bubbleSort() {
     const arr = $('#canvas-container').children();
     const arrLen = $('#canvas-container').children().length;
