@@ -36,24 +36,31 @@ $(document).ready(() => {
         } else {
             const selectedSort = $('.selected')[0].id;
 
+            const arr = $('#canvas-container').children();
+            const swapIndices = [];
+        
+            if(arr.length === 1) {
+                return endAnimation();
+            }
+
             switch (selectedSort) {
                 case 'bubble':
-                    bubbleSort();
+                    bubbleSort(arr, swapIndices);
                     break;
                 case 'selection':
-                    selectionSort();
+                    selectionSort(arr, swapIndices);
                     break;
                 case 'insertion':
-                    insertionSort();
+                    insertionSort(arr, swapIndices);
                     break;
                 case 'quick':
-                    quickSort();
+                    quickSort(arr, swapIndices);
                     break;
                 case 'merge':
-                    mergeSort();
+                    mergeSort(arr, swapIndices);
                     break;
                 case 'heap':
-                    heapSort();
+                    heapSort(arr, swapIndices);
                     break;
                 default: 
                     alert('No sort selected!');
@@ -106,16 +113,7 @@ function drawRectangles(numOfElements) {
 }
 
 // Sorting Algorithms
-function bubbleSort() {
-    const arr = $('#canvas-container').children();
-
-    const swapIndices = [];
-
-    // Array of one element is already sorted. Call end animation sequence. 
-    if(arr.length === 1) {
-        return endAnimation();
-    }
-
+function bubbleSort(arr, swapIndices) {
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
             // Convert String-Type Values to Numbers
@@ -139,16 +137,7 @@ function bubbleSort() {
     return swapAnimation(swapIndices, arr);
 }
 
-function insertionSort() {
-    const arr = $('#canvas-container').children();
-
-    const swapIndices = [];
-
-    // Array of one element is already sorted. Call end animation sequence. 
-    if(arr.length === 1) {
-        return endAnimation();
-    }
-
+function insertionSort(arr, swapIndices) {
     for (let i = 1; i < arr.length; i++) {
         let index = i; 
         
@@ -166,6 +155,31 @@ function insertionSort() {
     }
     
     return swapAnimation(swapIndices, arr);
+}
+
+function selectionSort(arr, swapIndices) {
+    for (let i = 0; i < arr.length; i++) {
+        const smallestIndex = indexOfSmallestValue(arr, i);
+
+        swapIndices.push([i, smallestIndex]);
+        swapData(i, smallestIndex, arr);
+    }
+
+    return swapAnimation(swapIndices, arr);
+}
+
+function indexOfSmallestValue(arr, iteration) {
+    let index = iteration; 
+    let min = arr[index];
+
+    for (let i = index + 1; i < arr.length; i++) {
+        if (min > arr[i]) {
+            min = arr[i];
+            index = i; 
+        }
+    }
+
+    return index;
 }
 
 // Swap Dataset Height
