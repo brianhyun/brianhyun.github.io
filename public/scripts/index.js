@@ -9,16 +9,13 @@ $(document).ready(function() {
 });
 
 function createValueDivs() {
-    // Grab all rectangles from canvas container. 
     const arr = $('#canvas-container').children();
     const arrLen = $('#canvas-container').children().length;
 
-    // Go through all the divs, get height value, and create value div. 
+    // Go through all the divs, get height value, and create new values-div. 
     for (let i = 0; i < arrLen; i++) {
-        // Grab height value.
         const currentRectangleHeight = arr[i].dataset.height;
 
-        // Create a new div with height value as text content. 
         const div = `<div class='values'>${currentRectangleHeight}</div>`;
 
         // When new div is appended to the rectangle, the div is rendered as text content, not as HTML. 
@@ -46,9 +43,8 @@ function processInput(event) {
 }
 
 function drawRectangles(numOfElements) {
-    // Remove all other divs that may be in the container from previous sort operations. 
+    // Remove all rectangle-divs (and their child value-divs) from previous sort operations. 
     $('#canvas-container').empty();
-    $('.values').detach();
 
     // Calculate the width of each rectangle based on the container width and number of selected elements. 
     const rectWidth = $('#canvas-container').width() / numOfElements; 
@@ -75,13 +71,12 @@ function sort() {
 }
 
 function bubbleSort() {
-    // Grab all rectangles from canvas container. 
     const arr = $('#canvas-container').children();
     const arrLen = $('#canvas-container').children().length;
 
     const swapIndices = [];
 
-    // If array only has one element, there is no need to sort. Call endAnimation(). 
+    // Array of one element is already sorted. Call end animation sequence. 
     if(arr.length === 1) {
         return endAnimation();
     }
@@ -116,8 +111,9 @@ function swapData(a, b, arr) {
     arr[b].dataset.height = dataTemp;
 }
 
+// Swap height values for rectangles-divs and innerText values for values-divs.  
 function swapStyle(a, b, arr) {
-    // Swap values for height property. 
+
     let styleTemp = arr[a].style.height;
     arr[a].style.height = arr[b].style.height;
     arr[b].style.height = styleTemp;
@@ -128,15 +124,13 @@ function swapStyle(a, b, arr) {
     arr[b].firstChild.innerText = textTemp;
 }
 
+// Run swaps on the rectangles-divs, and, once completed, run the end animation sequence. 
 async function swapAnimation(swapIndices, arr) {
-    // Wrap the swapAnimation process (i.e. the entire for loop) in a promise so that it be completed before running the end-animation sequence. 
-        // Once the swap animation is done (i.e. checked via the conditional statement), then run the end-animation sequence. 
     await new Promise((resolve, reject) => {
         for (let i = 0; i < swapIndices.length; i++) {
             setTimeout(() => {
                 swapStyle(swapIndices[i][0], swapIndices[i][1], arr);
-
-                // After all the swaps have taken place, run the endAnimation() sequence. 
+ 
                 if (i === swapIndices.length - 1) {
                     resolve(endAnimation());
                 }
@@ -145,8 +139,8 @@ async function swapAnimation(swapIndices, arr) {
     }); 
 }
 
+// Go through the sorted array and change the background colors for rectangles-divs. 
 function endAnimation() {
-    // Go through the sorted array and change the background colors. 
     const arr = $('#canvas-container').children();
     const arrLen = $('#canvas-container').children().length;
 
