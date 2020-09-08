@@ -12,6 +12,9 @@ $(document).ready(() => {
             $('#display__checkbox').prop('checked', false);
         }
 
+        // Clear selected sort. 
+        $('.algorithm__sorts').removeClass('selected');
+
         // Prevent Default Form Behavior
         event.preventDefault();
     });
@@ -34,14 +37,14 @@ $(document).ready(() => {
         if (!sorts.hasClass('selected')) {
             alert('No sorts selected!');
         } else {
-            const selectedSort = $('.selected')[0].id;
-
             const arr = $('#canvas-container').children();
             const swapIndices = [];
         
             if(arr.length === 1) {
                 return endAnimation();
             }
+
+            const selectedSort = $('.selected')[0].id;
 
             switch (selectedSort) {
                 case 'bubble':
@@ -157,7 +160,10 @@ function insertionSort(arr, swapIndices) {
     return swapAnimation(swapIndices, arr);
 }
 
+// [5,4,3]
+
 function selectionSort(arr, swapIndices) {
+
     for (let i = 0; i < arr.length; i++) {
         const smallestIndex = indexOfSmallestValue(arr, i);
 
@@ -168,13 +174,18 @@ function selectionSort(arr, swapIndices) {
     return swapAnimation(swapIndices, arr);
 }
 
+// [5,4,3]
+// 0 
+
 function indexOfSmallestValue(arr, iteration) {
     let index = iteration; 
-    let min = arr[index];
+    let min = parseInt(arr[index].dataset.height, 10);
 
     for (let i = index + 1; i < arr.length; i++) {
-        if (min > arr[i]) {
-            min = arr[i];
+        let nextValue = parseInt(arr[i].dataset.height, 10);
+        
+        if (min > nextValue) {
+            min = nextValue;
             index = i; 
         }
     }
