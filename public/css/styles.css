@@ -143,7 +143,11 @@ main {
 .generate-btn {
     border: 0;
     border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 3px;
     padding: 5%;
+    text-transform: uppercase;
 }
 
 .generate-btn:focus {
@@ -193,7 +197,8 @@ main {
     cursor: pointer;
 }
 
-.selected {
+.selected,
+.active-btn {
     background-color: rgb(26, 115, 232);
     color: #ffffff;
 }

@@ -2,8 +2,28 @@ $(document).ready(() => {
     // Load page with unsorted array of 25 rectangles.  
     drawRectangles(25);
 
+    // Add selected class to generate btn.
+    $('.generate-btn').addClass('active-btn');
+
+    // On valid input change, change button style to indicate generation. 
+    $('#elements').on('input', function() {
+        if($(this).val()) {
+            $('.generate-btn').addClass('active-btn');
+        } else {
+            $('.generate-btn').removeClass('active-btn');
+        }
+    });
+
+    // Under JavaScript, the letter 'e' and the period (.) symbol are allowed in input elements of type number 
+    // because they are mathematically relevant symbols (i.e. 10e2, 1.22); 
+    $('#elements').keydown((event) => {
+        if (event.key === 'e' || event.key === '.') {
+            return false;
+        }
+    });
+
     // Generate user-specified number of rectangles on generate click.
-    $('.generate-btn').click(() => {
+    $('.form__elements').submit(() => {
         const numOfElements = $('#elements').val();
         drawRectangles(numOfElements);
 
@@ -66,7 +86,6 @@ $(document).ready(() => {
                     heapSort(arr, swapIndices);
                     break;
                 default: 
-                    alert('No sort selected!');
             }
         }        
     });
@@ -174,16 +193,13 @@ function selectionSort(arr, swapIndices) {
     return swapAnimation(swapIndices, arr);
 }
 
-// [5,4,3]
-// 0 
-
 function indexOfSmallestValue(arr, iteration) {
     let index = iteration; 
     let min = parseInt(arr[index].dataset.height, 10);
 
     for (let i = index + 1; i < arr.length; i++) {
         let nextValue = parseInt(arr[i].dataset.height, 10);
-        
+
         if (min > nextValue) {
             min = nextValue;
             index = i; 
