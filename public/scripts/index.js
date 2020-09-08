@@ -1,10 +1,64 @@
-$(document).ready(function() {
-    // Have the page loaded with an unsorted array of 25 rectangles.  
+$(document).ready(() => {
+    // Load page with unsorted array of 25 rectangles.  
     drawRectangles(25);
 
+    // Generate user-specified number of rectangles on generate click.
+    $('.generate-btn').click(() => {
+        const numOfElements = $('#elements').val();
+        drawRectangles(numOfElements);
+
+        // If 'display values' is checked, then uncheck it. 
+        if ($('#display__checkbox')[0].checked) {
+            $('#display__checkbox').prop('checked', false);
+        }
+
+        // Prevent Default Form Behavior
+        event.preventDefault();
+    });
+
     // Show/hide value divs on checkbox click. 
-    $("#display__checkbox").click((event) => {
-        $(".values").toggle();
+    $('#display__checkbox').click(() => {
+        $('.values').toggle();
+    });
+
+    // Only add 'selected' class to selected sort. 
+    $('.algorithm__sorts').click(function() {
+        $('.algorithm__sorts').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
+    // Run specified sort on sort click. 
+    $('.sort-btn').click(() => {
+        const sorts = $('.algorithm__sorts');
+
+        if (!sorts.hasClass('selected')) {
+            alert('No sorts selected!');
+        } else {
+            const selectedSort = $('.selected')[0].id;
+
+            switch (selectedSort) {
+                case 'bubble':
+                    bubbleSort();
+                    break;
+                case 'selection':
+                    selectionSort();
+                    break;
+                case 'insertion':
+                    insertionSort();
+                    break;
+                case 'quick':
+                    quickSort();
+                    break;
+                case 'merge':
+                    mergeSort();
+                    break;
+                case 'heap':
+                    heapSort();
+                    break;
+                default: 
+                    alert('No sort selected!');
+            }
+        }        
     });
 });
 
@@ -25,21 +79,7 @@ function createValueDivs() {
         arr[i].append(valueDiv[0]);
     }
 
-    $(".values").hide();
-}
-
-// When user clicks "generates"
-function processInput(event) {
-    const numOfElements = $('#elements').val();
-    drawRectangles(numOfElements);
-
-    // If 'display values' is checked, then uncheck it. 
-    if ($("#display__checkbox")[0].checked) {
-        $("#display__checkbox").prop("checked", false);
-    }
-
-    // Prevent Default Form Behavior
-    event.preventDefault();
+    $('.values').hide();
 }
 
 function drawRectangles(numOfElements) {
@@ -146,7 +186,7 @@ function endAnimation() {
 
     for (let i = 0; i < arrLen; i++) {
         setTimeout(() => {
-            arr[i].style.backgroundColor = "#39D055";
+            arr[i].style.backgroundColor = '#39D055';
         }, i * 35);
     }
 }

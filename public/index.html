@@ -21,7 +21,7 @@
         <section class="query-container">
             <!-- Input Form -->
             <div class="query-section form">
-                <form class="form__elements" onsubmit="processInput(event)">
+                <form class="form__elements">
                     <input id="elements" placeholder="Number of Items" type="number" min="1" max="100" required>
                     <button class="generate-btn" type="submit">Generate</button>
                 </form>
@@ -39,24 +39,27 @@
             <div class="query-section algorithms">
                 <p class="algorithms__header">Pick Sort</p>
                 <div class="algorithms__sorts-container">
-                    <div id="bubble-sort" class="algorithm__sorts">
+                    <div id="bubble" class="algorithm__sorts">
                         Bubble 
                     </div>
-                    <div id="selection-sort" class="algorithm__sorts">
+                    <div id="selection" class="algorithm__sorts">
                         Selection 
                     </div>
-                    <div id="insertion-sort" class="algorithm__sorts">
+                    <div id="insertion" class="algorithm__sorts">
                         Insertion
                     </div>
-                    <div id="quick-sort" class="algorithm__sorts">
+                    <div id="quick" class="algorithm__sorts">
                         Quick 
                     </div>
-                    <div id="merge-sort" class="algorithm__sorts">
+                    <div id="merge" class="algorithm__sorts">
                         Merge 
+                    </div>
+                    <div id="heap" class="algorithm__sorts">
+                        Heap
                     </div>
                 </div>
 
-                <button class="sort-btn" onclick="sort()">Sort</button>
+                <button class="sort-btn">Sort</button>
             </div>
         </section>
 
