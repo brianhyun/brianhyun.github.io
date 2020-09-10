@@ -203,6 +203,13 @@ main {
     color: #ffffff;
 }
 
+/* Quick Sort Styles */
+.container {
+    align-items: flex-end;
+    display: flex;
+    height: 100%;
+}
+
 /* Sort Button */
 .sort-btn {
     background-color: rgb(26, 115, 232);

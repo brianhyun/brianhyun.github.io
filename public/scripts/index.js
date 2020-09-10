@@ -77,7 +77,8 @@ $(document).ready(() => {
                     insertionSort(arr, swapIndices);
                     break;
                 case 'quick':
-                    quickSort(arr, swapIndices);
+                    quickSort(swapIndices, arr, 0, arr.length - 1);
+                    swapAnimation(swapIndices, arr);
                     break;
                 case 'merge':
                     mergeSort(arr, swapIndices);
@@ -179,10 +180,7 @@ function insertionSort(arr, swapIndices) {
     return swapAnimation(swapIndices, arr);
 }
 
-// [5,4,3]
-
 function selectionSort(arr, swapIndices) {
-
     for (let i = 0; i < arr.length; i++) {
         const smallestIndex = indexOfSmallestValue(arr, i);
 
@@ -209,6 +207,35 @@ function indexOfSmallestValue(arr, iteration) {
     return index;
 }
 
+function quickSort(swapIndices, arr, left, right) {
+	if (left < right) {
+		const pivotIndex = partition(swapIndices, arr, left, right);
+	
+		quickSort(swapIndices, arr, left, pivotIndex - 1);
+		quickSort(swapIndices, arr, pivotIndex + 1, right);
+    }
+}
+
+function partition(swapIndices, arr, left, right) {
+    const pivot = parseInt(arr[right].dataset.height, 10);
+    console.log('pivot:', pivot); 
+	let i = left - 1;
+
+	for (let j = left; j <= right - 1; j++) {
+        const currentElement = parseInt(arr[j].dataset.height, 10);
+        console.log('current element:', currentElement);
+		if (currentElement < pivot) {
+            i++; 
+            swapIndices.push([i, j]);
+			swapData(i, j, arr); 
+		}
+    }
+
+    swapIndices.push([i+1, right]);
+	swapData(i+1, right, arr);
+	return i+1; 
+}
+
 // Swap Dataset Height
 function swapData(a, b, arr) {
     let dataTemp = arr[a].dataset.height;
@@ -218,12 +245,10 @@ function swapData(a, b, arr) {
 
 // Swap height values for rectangles-divs and innerText values for values-divs.  
 function swapStyle(a, b, arr) {
-
     let styleTemp = arr[a].style.height;
     arr[a].style.height = arr[b].style.height;
     arr[b].style.height = styleTemp;
 
-    // Swap innerText for div values. 
     let textTemp = arr[a].firstChild.innerText;
     arr[a].firstChild.innerText = arr[b].firstChild.innerText;
     arr[b].firstChild.innerText = textTemp;
