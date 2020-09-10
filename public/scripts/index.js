@@ -218,12 +218,10 @@ function quickSort(swapIndices, arr, left, right) {
 
 function partition(swapIndices, arr, left, right) {
     const pivot = parseInt(arr[right].dataset.height, 10);
-    console.log('pivot:', pivot); 
 	let i = left - 1;
 
 	for (let j = left; j <= right - 1; j++) {
         const currentElement = parseInt(arr[j].dataset.height, 10);
-        console.log('current element:', currentElement);
 		if (currentElement < pivot) {
             i++; 
             swapIndices.push([i, j]);
