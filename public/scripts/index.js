@@ -55,7 +55,7 @@ $(document).ready(() => {
         const sorts = $('.algorithm__sorts');
 
         if (!sorts.hasClass('selected')) {
-            alert('No sorts selected!');
+            alert('Select a Sort!');
         } else {
             const arr = $('#canvas-container').children();
             const swapIndices = [];
@@ -81,7 +81,7 @@ $(document).ready(() => {
                     swapAnimation(swapIndices, arr);
                     break;
                 case 'merge':
-                    mergeSort(arr, swapIndices);
+                    mergeSort(arr, 0, arr.length - 1);
                     break;
                 case 'heap':
                     heapSort(arr, swapIndices);
@@ -135,7 +135,11 @@ function drawRectangles(numOfElements) {
     createValueDivs();
 }
 
-// Sorting Algorithms
+/*
+ * Sorting Algorithms
+*/
+
+// Bubble Sort
 function bubbleSort(arr, swapIndices) {
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
@@ -160,6 +164,7 @@ function bubbleSort(arr, swapIndices) {
     return swapAnimation(swapIndices, arr);
 }
 
+// Insertion Sort
 function insertionSort(arr, swapIndices) {
     for (let i = 1; i < arr.length; i++) {
         let index = i; 
@@ -180,6 +185,7 @@ function insertionSort(arr, swapIndices) {
     return swapAnimation(swapIndices, arr);
 }
 
+// Selection Sort
 function selectionSort(arr, swapIndices) {
     for (let i = 0; i < arr.length; i++) {
         const smallestIndex = indexOfSmallestValue(arr, i);
@@ -207,6 +213,7 @@ function indexOfSmallestValue(arr, iteration) {
     return index;
 }
 
+// Quick Sort
 function quickSort(swapIndices, arr, left, right) {
 	if (left < right) {
 		const pivotIndex = partition(swapIndices, arr, left, right);
@@ -234,6 +241,7 @@ function partition(swapIndices, arr, left, right) {
 	return i+1; 
 }
 
+// Heap Sort
 function maxHeap(swapIndices, arr, arrLen, parentIndex) {
     let maxIndex = parentIndex;
     const leftChildIndex = (parentIndex * 2) + 1; 
@@ -268,6 +276,85 @@ function heapSort(arr, swapIndices) {
 	}
 
     return swapAnimation(swapIndices, arr);
+}
+
+// Merge Sort 
+function mergeSort(arr, left, right) {
+	if (left < right) {
+		const middle = Math.floor((right - left) / 2) + left;
+
+		mergeSort(arr, left, middle);
+		mergeSort(arr, middle + 1, right);
+	
+		merge(arr, left, middle, right); 
+	}
+}
+
+function merge(arr, left, middle, right) {
+	const leftSize = middle - left + 1; 
+    const rightSize = right - middle; 
+  
+	// Create temporary arrays.
+    const tempLeft = [], tempRight = []; 
+  
+    // Copy data to temp arrays.
+    for (let i = 0; i < leftSize; i++) {
+        // this is a reference to the original array 
+        // tempRight.push(arr[left + i]); 
+        const data = {
+            dataHeight: arr[left + i].dataset.height,
+            styleHeight: arr[left + i].style.height,
+            valueText: arr[left + i].firstChild.innerText,
+        };
+        tempLeft.push(data); 
+	}
+
+    for (let i = 0; i < rightSize; i++) {
+        // this is a reference to the original array 
+        // tempRight.push(arr[middle + 1 + i]); 
+        const data = {
+            dataHeight: arr[middle + 1 + i].dataset.height,
+            styleHeight: arr[middle + 1 + i].style.height,
+            valueText: arr[middle + 1 + i].firstChild.innerText,
+        };
+        tempRight.push(data); 
+	}
+  
+    // Compare values in left half and right half and store lesser values in original array. 
+    let i = 0, j = 0, k = left;
+
+    while (i < leftSize && j < rightSize) { 
+        if (parseInt(tempLeft[i].dataHeight, 10) <= parseInt(tempRight[j].dataHeight, 10)) { 
+            arr[k].dataset.height = tempLeft[i].dataHeight; 
+            arr[k].style.height = tempLeft[i].styleHeight; 
+            arr[k].firstChild.innerText = tempLeft[i].valueText;
+            i++; 
+        } else {      
+            arr[k].dataset.height = tempRight[j].dataHeight; 
+            arr[k].style.height = tempRight[j].styleHeight; 
+            arr[k].firstChild.innerText = tempRight[j].valueText;
+            j++; 
+        } 
+        k++; 
+    } 
+  
+    // Copy remaining elements of left half.
+    while (i < leftSize) { 
+        arr[k].dataset.height = tempLeft[i].dataHeight; 
+        arr[k].style.height = tempLeft[i].styleHeight; 
+        arr[k].firstChild.innerText = tempLeft[i].valueText;
+        i++; 
+        k++; 
+    } 
+  
+    // Copy remaining elements of right half. 
+    while (j < rightSize) { 
+        arr[k].dataset.height = tempRight[j].dataHeight; 
+        arr[k].style.height = tempRight[j].styleHeight; 
+        arr[k].firstChild.innerText = tempRight[j].valueText;
+        j++; 
+        k++; 
+    } 
 }
 
 // Swap Dataset Height
