@@ -234,6 +234,42 @@ function partition(swapIndices, arr, left, right) {
 	return i+1; 
 }
 
+function maxHeap(swapIndices, arr, arrLen, parentIndex) {
+    let maxIndex = parentIndex;
+    const leftChildIndex = (parentIndex * 2) + 1; 
+    const rightChildIndex = (parentIndex * 2) + 2; 
+
+	if ((leftChildIndex < arrLen) && (parseInt(arr[leftChildIndex].dataset.height, 10) > parseInt(arr[maxIndex].dataset.height, 10))) {
+        maxIndex = leftChildIndex;
+    }
+    
+	if ((rightChildIndex < arrLen) && (parseInt(arr[rightChildIndex].dataset.height, 10) > parseInt(arr[maxIndex].dataset.height, 10))) {
+		maxIndex = rightChildIndex;
+	}
+
+	if (maxIndex !== parentIndex) {
+        swapIndices.push([parentIndex, maxIndex]);
+		swapData(parentIndex, maxIndex, arr); 
+		maxHeap(swapIndices, arr, arrLen, maxIndex);
+	}
+}
+
+function heapSort(arr, swapIndices) {
+    const arrLen = arr.length; 
+
+	for (let i = Math.floor((arrLen / 2) - 1); i >= 0; i--) {
+		maxHeap(swapIndices, arr, arrLen, i);
+	}
+
+	for (let i = arrLen - 1; i > 0; i--) {
+        swapIndices.push([0, i]);
+		swapData(0, i, arr);
+		maxHeap(swapIndices, arr, i, 0);
+	}
+
+    return swapAnimation(swapIndices, arr);
+}
+
 // Swap Dataset Height
 function swapData(a, b, arr) {
     let dataTemp = arr[a].dataset.height;
