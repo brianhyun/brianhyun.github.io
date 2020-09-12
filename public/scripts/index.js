@@ -35,6 +35,12 @@ $(document).ready(() => {
         // Clear selected sort. 
         $('.algorithm__sorts').removeClass('selected');
 
+        // Re-add click event handler, which was removed when user clicked sort. 
+        $('.algorithm__sorts').click(function() {
+            $('.algorithm__sorts').removeClass('selected');
+            $(this).addClass('selected');
+        });
+
         // Prevent Default Form Behavior
         event.preventDefault();
     });
@@ -52,6 +58,9 @@ $(document).ready(() => {
 
     // Run specified sort on sort click. 
     $('.sort-btn').click(() => {
+        // Prevent user from clicking on another sorting method. 
+        $('.algorithm__sorts').off('click');
+
         const sorts = $('.algorithm__sorts');
 
         if (!sorts.hasClass('selected')) {
