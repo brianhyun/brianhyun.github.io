@@ -81,7 +81,9 @@ $(document).ready(() => {
                     swapAnimation(swapIndices, arr);
                     break;
                 case 'merge':
-                    mergeSort(arr, 0, arr.length - 1);
+                    const overrideIndexValueArr = [];
+                    mergeSort(overrideIndexValueArr, arr, 0, arr.length - 1);
+                    mergeSortOverrideAnimation(arr, overrideIndexValueArr);
                     break;
                 case 'heap':
                     heapSort(arr, swapIndices);
@@ -279,18 +281,18 @@ function heapSort(arr, swapIndices) {
 }
 
 // Merge Sort 
-function mergeSort(arr, left, right) {
+function mergeSort(overrideIndexValueArr, arr, left, right) {
 	if (left < right) {
 		const middle = Math.floor((right - left) / 2) + left;
 
-		mergeSort(arr, left, middle);
-		mergeSort(arr, middle + 1, right);
+		mergeSort(overrideIndexValueArr, arr, left, middle);
+		mergeSort(overrideIndexValueArr, arr, middle + 1, right);
 	
-		merge(arr, left, middle, right); 
+		merge(overrideIndexValueArr, arr, left, middle, right); 
 	}
 }
 
-function merge(arr, left, middle, right) {
+function merge(overrideIndexValueArr, arr, left, middle, right) {
 	const leftSize = middle - left + 1; 
     const rightSize = right - middle; 
   
@@ -299,40 +301,26 @@ function merge(arr, left, middle, right) {
   
     // Copy data to temp arrays.
     for (let i = 0; i < leftSize; i++) {
-        // this is a reference to the original array 
-        // tempRight.push(arr[left + i]); 
-        const data = {
-            dataHeight: arr[left + i].dataset.height,
-            styleHeight: arr[left + i].style.height,
-            valueText: arr[left + i].firstChild.innerText,
-        };
-        tempLeft.push(data); 
+        tempLeft.push(arr[left + i].dataset.height); 
 	}
 
     for (let i = 0; i < rightSize; i++) {
-        // this is a reference to the original array 
-        // tempRight.push(arr[middle + 1 + i]); 
-        const data = {
-            dataHeight: arr[middle + 1 + i].dataset.height,
-            styleHeight: arr[middle + 1 + i].style.height,
-            valueText: arr[middle + 1 + i].firstChild.innerText,
-        };
-        tempRight.push(data); 
+        tempRight.push(arr[middle + 1 + i].dataset.height); 
 	}
   
     // Compare values in left half and right half and store lesser values in original array. 
     let i = 0, j = 0, k = left;
 
     while (i < leftSize && j < rightSize) { 
-        if (parseInt(tempLeft[i].dataHeight, 10) <= parseInt(tempRight[j].dataHeight, 10)) { 
-            arr[k].dataset.height = tempLeft[i].dataHeight; 
-            arr[k].style.height = tempLeft[i].styleHeight; 
-            arr[k].firstChild.innerText = tempLeft[i].valueText;
+        const leftChildElement = parseInt(tempLeft[i], 10), rightChildElement = parseInt(tempRight[j], 10);    
+
+        if (leftChildElement <= rightChildElement) { 
+            overrideIndexValueArr.push([k, tempLeft[i]]);
+            arr[k].dataset.height = tempLeft[i]; 
             i++; 
-        } else {      
-            arr[k].dataset.height = tempRight[j].dataHeight; 
-            arr[k].style.height = tempRight[j].styleHeight; 
-            arr[k].firstChild.innerText = tempRight[j].valueText;
+        } else {    
+            overrideIndexValueArr.push([k, tempRight[j]]);
+            arr[k].dataset.height = tempRight[j]; 
             j++; 
         } 
         k++; 
@@ -340,21 +328,42 @@ function merge(arr, left, middle, right) {
   
     // Copy remaining elements of left half.
     while (i < leftSize) { 
-        arr[k].dataset.height = tempLeft[i].dataHeight; 
-        arr[k].style.height = tempLeft[i].styleHeight; 
-        arr[k].firstChild.innerText = tempLeft[i].valueText;
+        overrideIndexValueArr.push([k, tempLeft[i]]);
+        arr[k].dataset.height = tempLeft[i]; 
         i++; 
         k++; 
     } 
   
     // Copy remaining elements of right half. 
-    while (j < rightSize) { 
-        arr[k].dataset.height = tempRight[j].dataHeight; 
-        arr[k].style.height = tempRight[j].styleHeight; 
-        arr[k].firstChild.innerText = tempRight[j].valueText;
+    while (j < rightSize) {
+        overrideIndexValueArr.push([k, tempRight[j]]);
+        arr[k].dataset.height = tempRight[j]; 
         j++; 
         k++; 
     } 
+}
+
+function mergeSortOverrideValue(arr, overrideIndexValueArr) {
+    const k = overrideIndexValueArr[0], dataHeight = overrideIndexValueArr[1];
+
+    arr[k].dataset.height = dataHeight; 
+    arr[k].style.height = dataHeight + '%'; 
+    arr[k].firstChild.innerText = dataHeight;
+}
+
+async function mergeSortOverrideAnimation(arr, overrideIndexValueArr) {
+    await new Promise((resolve, reject) => {
+        for (let i = 0; i < overrideIndexValueArr.length; i++) {
+            setTimeout(() => {
+                console.log(overrideIndexValueArr[i]);
+                mergeSortOverrideValue(arr, overrideIndexValueArr[i]); 
+
+                if (i === overrideIndexValueArr.length - 1) {
+                    resolve(endAnimation());
+                }
+            }, i * 10);
+        }
+    });
 }
 
 // Swap Dataset Height
