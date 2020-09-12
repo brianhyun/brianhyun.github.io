@@ -5,8 +5,8 @@ const rootPath = require('../util/path');
 
 const router = express.Router(); 
 
-router.get('/', (req, res, next) => {
-	res.sendFile(path.join(rootPath, 'public', 'index.html'));
+router.use((req, res, next) => {
+	res.sendFile(path.join(rootPath, 'public', '404.html'));
 });
 
 module.exports = router; 
