@@ -146,18 +146,15 @@ function bubbleSort(arr, swapIndices) {
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i - 1; j++) {
             // Convert String-Type Values to Numbers
-                // The height values are stored in the dataset-height attribute of all divs. 
-                // The dataset-height attribute only accepts string values. 
+                // The height values are stored in the dataset-height attribute of all divs. The dataset-height attribute only accepts string values. 
             const currentValue = parseInt(arr[j].dataset.height, 10);
             const nextValue = parseInt(arr[j + 1].dataset.height, 10);
 
             // Compare Values and Swap if Current > Next
             if (currentValue > nextValue) {
-                // Push pairs of indices to swap into swapIndices array. 
-                    // We do this so that we can gather all pairs of indices to swap and run them all at once. 
+                // Push pairs of indices to swap into swapIndices array. We do this so that we can gather all pairs of indices to swap and run them all at once. 
                 swapIndices.push([j, j+1]);
-                // In order to get the correct pairs of indices to swap, you need to continue with the bubbleSort operation. 
-                    // Every swap relies on the previous swap to get the unsorted array closer to being sorted. 
+                // In order to get the correct pairs of indices to swap, you need to continue with the bubbleSort operation. Every swap relies on the previous swap to get the unsorted array closer to being sorted. 
                 swapData(j, j + 1, arr); 
             }
         }
@@ -351,11 +348,11 @@ function mergeSortOverrideValue(arr, overrideIndexValueArr) {
     arr[k].firstChild.innerText = dataHeight;
 }
 
+// For merge sort only. Override values in original array and when finished, run end animation sequence. 
 async function mergeSortOverrideAnimation(arr, overrideIndexValueArr) {
     await new Promise((resolve, reject) => {
         for (let i = 0; i < overrideIndexValueArr.length; i++) {
             setTimeout(() => {
-                console.log(overrideIndexValueArr[i]);
                 mergeSortOverrideValue(arr, overrideIndexValueArr[i]); 
 
                 if (i === overrideIndexValueArr.length - 1) {
