@@ -36,10 +36,7 @@ $(document).ready(() => {
         $('.algorithm__sorts').removeClass('selected');
 
         // Re-add click event handler, which was removed when user clicked sort. 
-        $('.algorithm__sorts').click(function() {
-            $('.algorithm__sorts').removeClass('selected');
-            $(this).addClass('selected');
-        });
+        enableSortingMethodClick();
 
         // Prevent Default Form Behavior
         event.preventDefault();
@@ -50,22 +47,18 @@ $(document).ready(() => {
         $('.values').toggle();
     });
 
-    // Only add 'selected' class to selected sort. 
-    $('.algorithm__sorts').click(function() {
-        $('.algorithm__sorts').removeClass('selected');
-        $(this).addClass('selected');
-    });
+    enableSortingMethodClick();
 
     // Run specified sort on sort click. 
     $('.sort-btn').click(() => {
-        // Prevent user from clicking on another sorting method. 
-        $('.algorithm__sorts').off('click');
-
         const sorts = $('.algorithm__sorts');
 
         if (!sorts.hasClass('selected')) {
             alert('Select a Sort!');
         } else {
+            // Prevent user from clicking on another sorting method. 
+            $('.algorithm__sorts').off('click');
+
             const arr = $('#canvas-container').children();
             const swapIndices = [];
         
@@ -102,6 +95,14 @@ $(document).ready(() => {
         }        
     });
 });
+
+function enableSortingMethodClick() {
+    // Only add 'selected' class to selected sort. 
+    $('.algorithm__sorts').click(function() {
+        $('.algorithm__sorts').removeClass('selected');
+        $(this).addClass('selected');
+    });
+}
 
 function createValueDivs() {
     const arr = $('#canvas-container').children();

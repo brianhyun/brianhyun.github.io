@@ -189,6 +189,7 @@ main {
     color: rgb(26, 115, 232);
     padding: 8%;
     text-align: center;
+    transition: background-color 0.1s linear;
 }
 
 .algorithm__sorts:hover {
