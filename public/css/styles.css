@@ -148,6 +148,7 @@ main {
     letter-spacing: 3px;
     padding: 5%;
     text-transform: uppercase;
+    transition: background-color 0.1s linear;
 }
 
 .generate-btn:focus {
