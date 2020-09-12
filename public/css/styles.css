@@ -42,7 +42,7 @@ a {
 */
 
 header {
-    color: rgb(26, 115, 232);
+    color: #1a73e8;
     font-size: 1.5rem;
     padding: 3% 5%;
     width: 100%;
@@ -100,14 +100,14 @@ main {
 }
 
 .rectangles {
-    background-color: rgb(26, 115, 232);
+    background-color: #1a73e8;
     border: 1px solid #ffffff;
     border-radius: 5px;
     position: relative; /* set position of value div */
 }
 
 .values {
-    color: rgb(26, 115, 232);
+    color: #1a73e8;
     font-weight: 500;
     position: absolute; 
         top: -25px;
@@ -130,13 +130,13 @@ main {
 #elements {
     border: 0;
     border-radius: 5px;
-    color: rgb(26, 115, 232);
-    margin-bottom: 5%;
+    color: #1a73e8;
+    margin: 5% 0;
     padding: 5%;
 }
 
 #elements:active {
-    outline: 1px solid rgb(26, 115, 232);
+    outline: 1px solid #1a73e8;
     outline-offset: -1px;
 }
 
@@ -172,10 +172,6 @@ main {
 }
 
 /* Algorithms Container */
-.algorithms__header {
-    text-align: center;
-}
-
 .algorithms__sorts-container { 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
@@ -185,24 +181,18 @@ main {
 }
 
 .algorithm__sorts {
-    border: 1px solid rgb(26, 115, 232);
+    border: 1px solid #1a73e8;
     border-radius: 5px;
-    color: rgb(26, 115, 232);
+    color: #1a73e8;
     padding: 8%;
     text-align: center;
     transition: background-color 0.1s linear;
 }
 
 .algorithm__sorts:hover {
-    background-color: rgb(26, 115, 232);
+    background-color: #1a73e8;
     color: #ffffff;
     cursor: pointer;
-}
-
-.selected,
-.active-btn {
-    background-color: rgb(26, 115, 232);
-    color: #ffffff;
 }
 
 /* Quick Sort Styles */
@@ -214,10 +204,10 @@ main {
 
 /* Sort Button */
 .sort-btn {
-    background-color: rgb(26, 115, 232);
+    background-color: #efefef;
     border: 0;
     border-radius: 5px;
-    color: #ffffff;
+    color: #000000;
     font-family: 'Tomorrow', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
@@ -228,10 +218,29 @@ main {
 }
 
 .sort-btn:hover {
-    background-color: #1464CC;
     cursor: pointer;
 }
 
 .sort-btn:focus {
     outline: none;
+}
+
+/* 
+ * Shared Styles
+*/
+.algorithms__header, .form__header {
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.selected,
+.active-btn {
+    background-color: #1a73e8;
+    color: #ffffff;
+}
+
+.active-btn:hover {
+    background-color: #004caf;
 }

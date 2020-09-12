@@ -5,7 +5,7 @@ $(document).ready(() => {
     // Add selected class to generate btn.
     $('.generate-btn').addClass('active-btn');
 
-    // On valid input change, change button style to indicate generation. 
+    // On valid input, change button style to indicate click-ability.
     $('#elements').on('input', function() {
         if($(this).val()) {
             $('.generate-btn').addClass('active-btn');
@@ -32,6 +32,10 @@ $(document).ready(() => {
             $('#display__checkbox').prop('checked', false);
         }
 
+        // Remove active-button class and click event handler on sort button.
+        $('.sort-btn').removeClass('active-btn');
+        $('.sort-btn').off('click');
+
         // Clear selected sort. 
         $('.algorithm__sorts').removeClass('selected');
 
@@ -48,7 +52,26 @@ $(document).ready(() => {
     });
 
     enableSortingMethodClick();
+});
 
+function enableSortingMethodClick() {
+    // Only add 'selected' class to selected sort. 
+    $('.algorithm__sorts').click(function() {
+        $('.algorithm__sorts').removeClass('selected');
+        $(this).addClass('selected');
+
+        // If input has a value, then (1) add active-btn class and (2) enable sort button click-ability. Otherwise, remove class and click event handler. 
+        if ($('#elements').val()) {
+            $('.sort-btn').addClass('active-btn');
+            enableSortButtonClick();
+        } else {
+            $('.sort-btn').removeClass('active-btn');
+            $('.sort-btn').off('click');
+        }
+    });
+}
+
+function enableSortButtonClick() {
     // Run specified sort on sort click. 
     $('.sort-btn').click(() => {
         const sorts = $('.algorithm__sorts');
@@ -93,14 +116,6 @@ $(document).ready(() => {
                 default: 
             }
         }        
-    });
-});
-
-function enableSortingMethodClick() {
-    // Only add 'selected' class to selected sort. 
-    $('.algorithm__sorts').click(function() {
-        $('.algorithm__sorts').removeClass('selected');
-        $(this).addClass('selected');
     });
 }
 
@@ -360,6 +375,8 @@ function mergeSortOverrideValue(arr, overrideIndexValueArr) {
 
 // For merge sort only. Override values in original array and when finished, run end animation sequence. 
 async function mergeSortOverrideAnimation(arr, overrideIndexValueArr) {
+    const animationSpeed = calculateAnimationSpeed(arr);
+
     await new Promise((resolve, reject) => {
         for (let i = 0; i < overrideIndexValueArr.length; i++) {
             setTimeout(() => {
@@ -368,7 +385,7 @@ async function mergeSortOverrideAnimation(arr, overrideIndexValueArr) {
                 if (i === overrideIndexValueArr.length - 1) {
                     resolve(endAnimation());
                 }
-            }, i * 10);
+            }, i * animationSpeed);
         }
     });
 }
@@ -393,6 +410,8 @@ function swapStyle(a, b, arr) {
 
 // Run swaps on the rectangles-divs, and, once completed, run the end animation sequence. 
 async function swapAnimation(swapIndices, arr) {
+    const animationSpeed = calculateAnimationSpeed(arr);
+
     await new Promise((resolve, reject) => {
         for (let i = 0; i < swapIndices.length; i++) {
             setTimeout(() => {
@@ -401,7 +420,7 @@ async function swapAnimation(swapIndices, arr) {
                 if (i === swapIndices.length - 1) {
                     resolve(endAnimation());
                 }
-            }, i * 10);
+            }, i * animationSpeed);
         }
     }); 
 }
@@ -410,9 +429,23 @@ async function swapAnimation(swapIndices, arr) {
 function endAnimation() {
     const arr = $('#canvas-container').children();
 
+    const animationSpeed = calculateAnimationSpeed(arr);
+
     for (let i = 0; i < arr.length; i++) {
         setTimeout(() => {
             arr[i].style.backgroundColor = '#39D055';
-        }, i * 35);
+        }, i * animationSpeed);
+    }
+}
+
+function calculateAnimationSpeed(arr) {
+    const arrLen = arr.length;
+
+    if (arrLen >= 0 && arrLen <= 25) {
+        return 20;
+    } else if (arrLen > 25 && arrLen <= 75) {
+        return 10; 
+    } else {
+        return 5; 
     }
 }
