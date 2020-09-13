@@ -2,6 +2,9 @@ $(document).ready(() => {
     // Load page with unsorted array of 25 rectangles.  
     drawRectangles(25);
 
+    // Set text size for value divs. 
+    setValueDivTextSize(25);
+
     // Add selected class to generate btn.
     $('.generate-btn').addClass('active-btn');
 
@@ -26,6 +29,9 @@ $(document).ready(() => {
     $('.form__elements').submit(() => {
         const numOfElements = $('#elements').val();
         drawRectangles(numOfElements);
+
+        // Set text size for value divs. 
+        setValueDivTextSize(numOfElements);
 
         // If 'display values' is checked, then uncheck it. 
         if ($('#display__checkbox')[0].checked) {
@@ -434,6 +440,7 @@ function endAnimation() {
     for (let i = 0; i < arr.length; i++) {
         setTimeout(() => {
             arr[i].style.backgroundColor = '#39D055';
+            arr[i].firstChild.style.color = '#39D055';
         }, i * animationSpeed);
     }
 }
@@ -449,3 +456,13 @@ function calculateAnimationSpeed(arr) {
         return 5; 
     }
 }
+
+function setValueDivTextSize(numOfElements) {
+    if (numOfElements > 75 && numOfElements <= 100) {
+        $('.values').addClass('smallText');
+    } else if (numOfElements > 25 && numOfElements <= 75) {
+        $('.values').addClass('mediumText');
+    } else {
+        $('.values').addClass('regularText');
+    }
+} 
