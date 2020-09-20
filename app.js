@@ -10,6 +10,6 @@ app.use(express.static('public'));
 app.use(indexRouter);
 app.use(errorController);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
 	console.log('Sorting Visualizer App running on port', 3000);
 });
