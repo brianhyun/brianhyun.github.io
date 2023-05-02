@@ -1,0 +1,316 @@
+html {
+  width: 100vw;
+  font-size: 10px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  font-size: 1.4rem;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+  width: 100vw;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/*
+ * Scrollbar 
+ */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cfcfcf;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/*
+ * Header Section
+*/
+
+header {
+  padding: 3% 5%;
+  width: 100%;
+}
+
+header > h1 {
+  color: #282828;
+  font-size: 3rem;
+}
+
+/*
+ * Footer Section
+*/
+
+footer {
+  align-items: center;
+  color: #a3a3a3;
+  display: flex;
+  justify-content: center;
+  padding: 3%;
+  width: 100%;
+}
+
+/*
+ * Main Section
+*/
+
+main {
+  display: flex;
+  justify-content: space-between;
+  padding: 2% 5%;
+  width: 100%;
+}
+
+/* Query Container */
+.query-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  justify-content: space-between;
+  margin-left: 5%;
+  width: 25%;
+}
+
+.query-section {
+  padding: 5%;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  border: 1px solid rgb(229, 229, 229);
+}
+
+/* Canvas Container */
+#canvas-container {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: flex-end;
+}
+
+.rectangles {
+  border-radius: 10px;
+  border: 1px solid rgb(246, 246, 246);
+  background-color: #1a73e8;
+  position: relative; /* set position of value div */
+}
+
+.values {
+  color: #1a73e8;
+  font-weight: 500;
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Input */
+.form__elements,
+#elements,
+.generate-btn {
+  width: 100%;
+}
+
+#elements,
+.generate-btn {
+  font-family: "Arial", sans-serif;
+}
+
+#elements {
+  border: 0;
+  padding: 5%;
+  margin: 5% 0;
+  font-size: 14px;
+  color: #1a73e8;
+  border-radius: 5px;
+}
+
+#elements:active {
+  outline: 1px solid #1a73e8;
+  outline-offset: -1px;
+}
+
+.generate-btn {
+  border: 0;
+  padding: 16px;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: background-color 0.1s linear;
+}
+
+.generate-btn:focus {
+  outline: none;
+}
+
+.generate-btn:hover {
+  cursor: pointer;
+}
+
+/* Display */
+.display {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+#display__checkbox {
+  border: 0;
+  height: 100%;
+}
+
+/* Algorithms Container */
+.algorithms__sorts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 10px;
+  margin: 6% 0;
+  width: 100%;
+}
+
+.algorithm__sorts {
+  border: 1px solid #1a73e8;
+  border-radius: 5px;
+  color: #1a73e8;
+  padding: 8%;
+  text-align: center;
+  transition: background-color 0.1s linear;
+}
+
+.algorithm__sorts:hover {
+  background-color: #1a73e8;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Quick Sort Styles */
+.container {
+  align-items: flex-end;
+  display: flex;
+  height: 100%;
+}
+
+/* Sort Button */
+.sort-btn {
+  background-color: #efefef;
+  border: 0;
+  border-radius: 5px;
+  color: #000000;
+  font-family: "Arial", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 7%;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.sort-btn:hover {
+  cursor: pointer;
+}
+
+.sort-btn:focus {
+  outline: none;
+}
+
+/* 
+ * Shared Styles
+*/
+.algorithms__header,
+.form__header {
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.selected,
+.active-btn {
+  background-color: #1a73e8;
+  color: #ffffff;
+}
+
+.active-btn:hover {
+  background-color: #004caf;
+}
+
+.regularText {
+  font-size: 1.4rem;
+}
+
+.mediumText {
+  font-size: 1.2rem;
+}
+
+.smallText {
+  font-size: 1rem;
+}
+
+/* 
+ * Media Query
+*/
+
+@media only screen and (max-width: 600px) {
+  header {
+    text-align: center;
+    padding: 5%;
+  }
+
+  main {
+    flex-direction: column;
+    padding: 5%;
+  }
+
+  .query-container {
+    height: 80vh;
+    margin: 0;
+    margin-top: 10%;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .query-container {
+    height: 85vh;
+  }
+
+  #canvas-container {
+    height: 85vh;
+  }
+}
